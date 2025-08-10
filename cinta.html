@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Bucin 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffa8a8);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        .title {
+            color: #e91e63;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .input-group {
+            margin: 1.5rem 0;
+        }
+
+        .input-group label {
+            display: block;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff8a8a;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #e91e63;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .button {
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 10px 5px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.4);
+            background: linear-gradient(45deg, #c2185b, #e91e63);
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #fff3f3, #ffe8e8);
+            border: 2px solid #ffb3b3;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .love-letter {
+            text-align: left;
+            line-height: 1.6;
+            color: #333;
+            font-style: italic;
+        }
+
+        .compatibility-score {
+            font-size: 2rem;
+            color: #e91e63;
+            font-weight: bold;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-description {
+            color: #666;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .romantic-quote {
+            font-style: italic;
+            color: #e91e63;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <h1 class="title">💕 Lauhul Mahfudz 💕</h1>
+        <p class="romantic-quote">"Cinta sejati adalah ketika dua Hati saling Mendoakan"</p>
+        
+        <div class="input-group">
+            <label for="yourName">Nama Kamu:</label>
+            <input type="text" id="yourName" placeholder="Masukkan nama kamu..." />
+        </div>
+        
+        <div class="input-group">
+            <label for="crushName">Nama Ikhwan/Akhwat yang Di cintai:</label>
+            <input type="text" id="crushName" placeholder="Masukkan nama dia..." />
+        </div>
+        
+        <div class="input-group">
+            <label for="phoneNumber">Nomor WhatsApp (opsional):</label>
+            <input type="text" id="phoneNumber" placeholder="Contoh: 628123456789" />
+            <small style="color: #666; font-size: 0.9rem;">Format: 628xxxxxxxxx (tanpa +, spasi, atau tanda hubung)</small>
+        </div>
+        
+        <div>
+            <button class="button" onclick="generateLoveLetter()">💌 Buat Surat Cinta lillah</button>
+            <button class="button" onclick="calculateCompatibility()">💖 Hitung Compatibility</button>
+        </div>
+        
+        <div id="result" class="result hidden"></div>
+    </div>
+
+    <script>
+        // Data untuk surat cinta acak
+        const loveLetterTemplates = [
+            "Habibii {crush}, setiap hari tanpamu rasanya seperti kopi tanpa gula, hambar dan tak bermakna. Kamu adalah sinar matahari di pagi hariku, bintang di malam gelap hidupku. Dengan cinta, {your}",
+            
+            "Untuk {crush} tersayang, hatiku berdetak lebih cepat setiap kali melihatmu. Kamu adalah jawaban dari semua doa-doaku. Aku berharap kita bisa menjalani sisa hidup bersama-sama. Love always, {your}",
+            
+            "Hey {crush}, tahukah kamu bahwa senyummu mampu mencerahkan hari tergelapku? Kamu adalah puzzle terakhir yang melengkapi hidupku. Aku mencintaimu lebih dari kata-kata yang bisa kuungkapkan. Forever yours, {your}",
+            
+            "{crush} yang terkasih, jika cinta adalah lautan, maka cintaku padamu adalah samudra yang tak bertepi. Setiap detik bersamamu adalah hadiah terindah dalam hidupku. With all my love, {your}",
+            
+            "Cinta {crush}, kamu adalah alasan mengapa aku percaya pada keajaiban. Bersamamu, dunia terasa lebih berwarna dan hidup lebih bermakna. Terima kasih sudah menjadi bagian terpenting dalam hidupku. Yours truly, {your}"
+        ];
+
+        const compatibilityMessages = {
+            high: [
+                "Kalian berdua seperti dibuat satu sama lain! 🔥",
+                "Pasangan yang sempurna! Jodoh banget nih! 💯",
+                "Chemistry kalian luar biasa! Match made in heaven! ✨",
+                "Kalian saling melengkapi dengan sempurna! 🌟"
+            ],
+            medium: [
+                "Ada potensi besar untuk hubungan yang indah! 😊",
+                "Dengan usaha, kalian bisa jadi pasangan yang harmonis! 💪",
+                "Compatibility kalian cukup baik, terus dijaga ya! 🌸",
+                "Hubungan kalian punya fondasi yang kuat! 💖"
+            ],
+            low: [
+                "Mungkin kalian perlu lebih saling memahami dulu 😅",
+                "Cinta memang butuh perjuangan, semangat! 💪",
+                "Perbedaan bisa jadi kekuatan jika dikelola dengan baik! 🌈",
+                "Yang penting komunikasi dan saling pengertian! 💝"
+            ]
+        };
+
+        // Fungsi untuk membuat hati-hati beranimasi
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartSymbols = ['💕', '💖', '💗', '💝', '💘', '💓', '💞'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Fungsi untuk copy ke clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Surat cinta sudah dicopy! Sekarang paste di WhatsApp ya! 💕');
+            }).catch(function() {
+                // Fallback untuk browser yang tidak support clipboard API
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Surat cinta sudah dicopy! Sekarang paste di WhatsApp ya! 💕');
+            });
+        }
+
+        // Fungsi untuk generate surat cinta
+        function generateLoveLetter() {
+            const yourName = document.getElementById('yourName').value.trim();
+            const crushName = document.getElementById('crushName').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if (!yourName || !crushName) {
+                alert('Isi nama kalian dulu dong! 💕');
+                return;
+            }
+
+            const randomTemplate = loveLetterTemplates[Math.floor(Math.random() * loveLetterTemplates.length)];
+            const loveLetter = randomTemplate
+                .replace(/{your}/g, yourName)
+                .replace(/{crush}/g, crushName);
+
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            let whatsappButton = '';
+            
+            if (phoneNumber) {
+                // Bersihkan nomor dari karakter yang tidak diperlukan
+                const cleanNumber = phoneNumber.replace(/[^0-9]/g, '');
+                const whatsappText = encodeURIComponent(loveLetter);
+                const whatsappUrl = https://wa.me/${cleanNumber}?text=${whatsappText};
+                
+                whatsappButton = `
+                    <button class="button" onclick="window.open('${whatsappUrl}', '_blank')" style="margin-top: 1rem;">
+                        📱 Kirim via WhatsApp
+                    </button>
+                `;
+            }
+
+            resultDiv.innerHTML = `
+                <h3 style="color: #e91e63; margin-bottom: 1rem;">💌 Surat Cinta Untukmu</h3>
+                <div class="love-letter">${loveLetter}</div>
+                <div style="margin-top: 1rem;">
+                    <button class="button" onclick="copyToClipboard('${loveLetter.replace(/'/g, "\\'")}')">
+                        📋 Copy Surat
+                    </button>
+                    ${whatsappButton}
+                </div>
+                <p style="margin-top: 1rem; font-style: italic; color: #666;">
+                    ${phoneNumber ? 'Klik tombol WhatsApp untuk kirim langsung! 💕' : 'Copy surat lalu kirim manual ke WhatsApp ya! 💕'}
+                </p>
+            `;
+            
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Fungsi untuk hitung compatibility score
+        function calculateCompatibility() {
+            const yourName = document.getElementById('yourName').value.trim();
+            const crushName = document.getElementById('crushName').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if (!yourName || !crushName) {
+                alert('Isi nama kalian dulu dong! 💕');
+                return;
+            }
+
+            // Algoritma sederhana untuk compatibility (berdasarkan nama)
+            let score = 0;
+            const combinedNames = (yourName + crushName).toLowerCase();
+            
+            // Hitung berdasarkan karakter yang sama
+            const charCount = {};
+            for (let char of combinedNames) {
+                charCount[char] = (charCount[char] || 0) + 1;
+            }
+            
+            // Hitung score berdasarkan keunikan dan kesamaan
+            const uniqueChars = Object.keys(charCount).length;
+            const totalChars = combinedNames.length;
+            score = Math.round((uniqueChars / totalChars) * 100);
+            
+            // Tambah randomness agar lebih menarik
+            score = Math.max(10, Math.min(99, score + Math.floor(Math.random() * 30) - 15));
+
+            let category, message;
+            if (score >= 80) {
+                category = 'high';
+                message = compatibilityMessages.high[Math.floor(Math.random() * compatibilityMessages.high.length)];
+            } else if (score >= 50) {
+                category = 'medium';
+                message = compatibilityMessages.medium[Math.floor(Math.random() * compatibilityMessages.medium.length)];
+            } else {
+                category = 'low';
+                message = compatibilityMessages.low[Math.floor(Math.random() * compatibilityMessages.low.length)];
+            }
+
+            const compatibilityText = 💖 COMPATIBILITY SCORE 💖\n\n${yourName} 💕 ${crushName}\n\nScore: ${score}%\n\n${message}\n\nIngat, cinta sejati tidak bisa diukur dengan angka! Yang terpenting adalah ketulusan hati 💝;
+            
+            let whatsappButton = '';
+            if (phoneNumber) {
+                const cleanNumber = phoneNumber.replace(/[^0-9]/g, '');
+                const whatsappText = encodeURIComponent(compatibilityText);
+                const whatsappUrl = https://wa.me/${cleanNumber}?text=${whatsappText};
+                
+                whatsappButton = `
+                    <button class="button" onclick="window.open('${whatsappUrl}', '_blank')" style="margin-top: 1rem;">
+                        📱 Share via WhatsApp
+                    </button>
+                `;
+            }
+
+            resultDiv.innerHTML = `
+                <h3 style="color: #e91e63; margin-bottom: 1rem;">💖 Compatibility Score</h3>
+                <div class="compatibility-score">${score}%</div>
+                <div class="score-description">
+                    <strong>${yourName} 💕 ${crushName}</strong>
+                </div>
+                <p style="margin-top: 1rem; font-size: 1.2rem; color: #e91e63;">
+                    ${message}
+                </p>
+                <div style="margin-top: 1rem;">
+                    <button class="button" onclick="copyToClipboard('${compatibilityText.replace(/'/g, "\\'")}')">
+                        📋 Copy Score
+                    </button>
+                    ${whatsappButton}
+                </div>
+                <p style="margin-top: 1rem; font-style: italic; color: #666;">
+                    Ingat, cinta sejati tidak bisa diukur dengan angka! Yang terpenting adalah ketulusan hati 💝
+                </p>
+            `;
+            
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            createHearts();
+        };
+
+        // Tambah event listener untuk Enter key
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const activeElement = document.activeElement;
+                if (activeElement.id === 'yourName' || activeElement.id === 'crushName') {
+                    generateLoveLetter();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
